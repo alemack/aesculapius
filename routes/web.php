@@ -15,17 +15,16 @@ use App\Http\Controllers\Admin\AdminController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Route::get('/users', [UserController::class, 'index'])->name('user.index');
 
-Route::group(['namespace'=>'Admin'], function() {
-    Route::get('users', [AdminController::class, 'index'])->name('user.index');
+Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'admin'], function() {
+    Route::get('/users', [AdminController::class, 'index'])->name('admin.user.index');
 });

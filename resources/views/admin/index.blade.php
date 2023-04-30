@@ -27,8 +27,8 @@
     <table>
         <thead>
             <tr>
-                <th>Имя</th>
-                <th>Email</th>
+                <th>ФИО</th>
+                <th>Почта</th>
                 <th>Роль</th>
                 <th>Действия</th>
             </tr>
@@ -40,11 +40,11 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role }}</td>
                     <td>
-                        <button type="button" class="btn btn-light"><a href="">Edit</a></button>
+                        <button type="button" class="btn btn-light"><a href="">Изменить</a></button>
                         <form method="POST" action="">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger" type="submit">Delete</button>
+                            <button class="btn btn-danger" type="submit">Удалить</button>
                         </form>
                     </td>
                 </tr>
