@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\User\EditController;
 use App\Http\Controllers\Admin\User\ShowController;
 use App\Http\Controllers\Admin\User\IndexController;
+use App\Http\Controllers\Admin\User\UpdateController;
 
 /*
 |--------------------------------------------------------------------------

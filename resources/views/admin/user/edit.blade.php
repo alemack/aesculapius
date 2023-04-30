@@ -1,49 +1,51 @@
 @extends('layouts.app')
 @section('content')
-    <div>
-        <form action="{{route('admin.user.update', $user->id)}}" method="post">
-            @csrf
-            @method('patch')
-            <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" name="title" class="form-control" id="title" placeholder="Title" value="{{$post->title}}">
-            </div>
-            <div class="form-group">
-                <label for="content">Content</label>
-                <textarea name="content"  class="form-control" id="content" placeholder="Content">{{$post->content}}</textarea>
-              </div>
-            <div class="form-group">
-                <label for="image">Image</label>
-                <input  name="image" type="text" class="form-control" id="image" placeholder="Image" value="{{$post->image}}">
-              </div>
-              <div class="form-group">
-                <label for="category">Category</label>
-                <select class="form-control" id="category" name="category_id">
-                    @foreach ($categories as $category)
+<link rel="stylesheet" href="{{ asset('css/userEdit.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<div>
+    <h1>Редактирование пользователя</h1>
+    @if ($errors->any())
+        <div>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <form method="POST" action="{{ route('admin.user.update', $user->id) }}">
+        @csrf
+        @method('patch')
+        <div>
+            <label for="name">ФИО:</label>
+            <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" required autofocus>
+        </div>
+        <div>
+            <label for="email">Почта:</label>
+            <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required>
+        </div>
+        <div>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password">
+        </div>
+        {{-- <div>
+            <label for="role">Роль:</label>
+            <input type="text" id="role" name="role" value="{{ old('role', $user->role) }}" required>
+        </div> --}}
+        <div class="form-group">
+            <label for="role">Роль:</label>
+            <select class="form-control" id="role" name="role">
+                @foreach ($roles as $role)
                         <option
-                        {{$category->id === $post->category->id ? 'selected' : ''}}
-
-                        value="{{$category->id}}">{{$category->title}}</option>
+                        {{$role->title === $user->role ? 'selected' : ''}}
+                        value="{{$role->title}}">{{$role->title}}</option>
                     @endforeach
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="tags">Tags</label>
-                <select multiple class="form-control" id="tags" name="tags[]">
-                    @foreach ($tags as $tag)
-                        <option
-                        @foreach ($post->tags as $postTag)
-                            {{$tag->id === $postTag->id ? 'selected' : ''}}
-                        @endforeach
-
-                        value="{{$tag->id}}">{{$tag->title}}</option>
-                    @endforeach
-                </select>
-              </div>
-            <button type="submit" class="btn btn-primary">Update</button>
-          </form>
-    </div>
-    <div>
-        <a href="{{route('post.index')}}" class="btn btn-primary mt-3">Back</a>
-    </div>
+            </select>
+        </div>
+        <button type="submit">Обновить</button>
+    </form>
+    <a href="{{ route('admin.user.index') }}">Обратно к списку пользователей</a>
+    {{-- <a href="{{ route('dashboard') }}">Back to Dashboard</a> --}}
+</div>
 @endsection
