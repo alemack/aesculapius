@@ -43,5 +43,8 @@
         {{-- </div> --}}
     </div>
 </div>
-<button type="button" class="btn btn-light"><a href="{{ route('home') }}">Вернуться в кабинет</a></button>
+{{-- <div> --}}
+    <hr>
+    <button type="button" class="btn btn-light"><a href="{{ route('home') }}">Вернуться в кабинет</a></button>
+{{-- </div> --}}
 @endsection
