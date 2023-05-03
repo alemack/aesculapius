@@ -12,8 +12,9 @@ class IndexController extends Controller
     public function __invoke()
     {
         // dd(22);
-        $users = User::all();
+        $users = User::paginate(5);
         // dd(auth()->user()->role);
+
         return view('admin.user.index', compact('users'));
     }
 }

@@ -50,4 +50,7 @@
     <hr>
     <button type="button" class="btn btn-light"><a href="{{ route('home') }}">Вернуться в кабинет</a></button>
 {{-- </div> --}}
+<div class="mt-3">
+    {{$users->links()}}
+</div>
 @endsection
