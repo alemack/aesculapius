@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\User\EditController;
 use App\Http\Controllers\Admin\User\ShowController;
 use App\Http\Controllers\Admin\User\IndexController;
+use App\Http\Controllers\Admin\User\StoreController;
+use App\Http\Controllers\Admin\User\CreateController;
 use App\Http\Controllers\Admin\User\UpdateController;
 use App\Http\Controllers\Admin\User\DestroyController;
 
@@ -36,6 +38,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::group(['prefix'=>'admin', 'namespace' => 'Admin', 'middleware'=> 'admin'], function() {
     Route::group(['prefix'=>'user', 'namespace' => 'User'], function () {
         Route::get('/users', [IndexController::class, '__invoke'])->name('admin.user.index');
+        Route::get('/users/create', [CreateController::class, '__invoke'])->name('admin.user.create');
+        Route::post('users', [StoreController::class, '__invoke'])->name('admin.user.store');
         Route::get('/users/{user}', [ShowController::class, '__invoke'])->name('admin.user.show');
         Route::get('users/{user}/edit', [EditController::class, '__invoke'])->name('admin.user.edit');
         Route::patch('users/{user}', [UpdateController::class, '__invoke'])->name('admin.user.update');
