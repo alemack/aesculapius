@@ -55,4 +55,22 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin', 'middleware'=> 'admin']
         Route::patch('schedules/{schedule}', [App\Http\Controllers\Admin\Schedule\UpdateController::class, '__invoke'])->name('admin.schedule.update');
         Route::delete('schedules/{schedule}', [App\Http\Controllers\Admin\Schedule\DestroyController::class, '__invoke'])->name('admin.schedule.delete');
     });
+    Route::group(['prefix'=>'doctor', 'namespace' => 'Doctor'], function () {
+        Route::get('/doctors', [App\Http\Controllers\Admin\Doctor\IndexController::class, '__invoke'])->name('admin.doctor.index');
+        Route::get('/doctors/create', [App\Http\Controllers\Admin\Doctor\CreateController::class, '__invoke'])->name('admin.doctor.create');
+        Route::post('doctors', [App\Http\Controllers\Admin\Doctor\StoreController::class, '__invoke'])->name('admin.doctor.store');
+        Route::get('/doctors/{doctor}', [App\Http\Controllers\Admin\Doctor\ShowController::class, '__invoke'])->name('admin.doctor.show');
+        Route::get('doctors/{doctor}/edit', [App\Http\Controllers\Admin\Doctor\EditController::class, '__invoke'])->name('admin.doctor.edit');
+        Route::patch('doctors/{doctor}', [App\Http\Controllers\Admin\Doctor\UpdateController::class, '__invoke'])->name('admin.doctor.update');
+        Route::delete('doctors/{doctor}', [App\Http\Controllers\Admin\Doctor\DestroyController::class, '__invoke'])->name('admin.doctor.delete');
+    });
+    Route::group(['prefix'=>'specialization', 'namespace' => 'Specialization'], function () {
+        Route::get('/specializations', [App\Http\Controllers\Admin\Specialization\IndexController::class, '__invoke'])->name('admin.specialization.index');
+        Route::get('/specializations/create', [App\Http\Controllers\Admin\Specialization\CreateController::class, '__invoke'])->name('admin.specialization.create');
+        Route::post('specializations', [App\Http\Controllers\Admin\Specialization\StoreController::class, '__invoke'])->name('admin.specialization.store');
+        Route::get('/specializations/{specialization}', [App\Http\Controllers\Admin\Specialization\ShowController::class, '__invoke'])->name('admin.specialization.show');
+        Route::get('specializations/{specialization}/edit', [App\Http\Controllers\Admin\Specialization\EditController::class, '__invoke'])->name('admin.specialization.edit');
+        Route::patch('specializations/{specialization}', [App\Http\Controllers\Admin\Specialization\UpdateController::class, '__invoke'])->name('admin.specialization.update');
+        Route::delete('specializations/{specialization}', [App\Http\Controllers\Admin\Specialization\DestroyController::class, '__invoke'])->name('admin.specialization.delete');
+    });
 });

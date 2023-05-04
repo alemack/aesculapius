@@ -4,9 +4,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <div>
-    <form action="{{route('admin.user.store')}}" method="post">
-        @csrf
-    <h1>Создание пользователя</h1>
+    <h1>Редактирование пользователя</h1>
     @if ($errors->any())
         <div>
             <ul>
@@ -16,14 +14,16 @@
             </ul>
         </div>
     @endif
-
+    <form method="POST" action="{{ route('admin.user.update', $user->id) }}">
+        @csrf
+        @method('patch')
         <div>
             <label for="name">ФИО:</label>
-            <input type="text" id="name" name="name" value="{{ old('name') }}" required autofocus>
+            <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" required autofocus>
         </div>
         <div>
             <label for="email">Почта:</label>
-            <input type="email" id="email" name="email" value="{{ old('email') }}" required>
+            <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required>
         </div>
         <div>
             <label for="password">Пароль:</label>
@@ -38,36 +38,14 @@
             <select class="form-control" id="role" name="role">
                 @foreach ($roles as $role)
                         <option
-                        {{old('role') == $role->title ? 'selected' : ''}}
+                        {{$role->title === $user->role ? 'selected' : ''}}
                         value="{{$role->title}}">{{$role->title}}</option>
                     @endforeach
             </select>
         </div>
-        {{-- <div class="form-group">
-            <label for="specialization">Роль:</label>
-            <select class="form-control" id="specialization" name="specialization">
-                @foreach ($specializations as $specialization)
-                        <option
-                        {{old('role') == $specialization->name ? 'selected' : ''}}
-                        value="{{$role->title}}">{{$role->title}}</option>
-                    @endforeach
-            </select>
-        </div> --}}
-        {{-- <div class="form-group">
-            <label for="specializations">Специализация</label>
-            <select multiple class="form-control" id="specializations" name="specializations[]">
-                @foreach ($specializations as $specialization)
-                    <option value="{{$specialization->id}}">{{$specialization->name}}</option>
-                @endforeach
-            </select>
-          </div> --}}
-        <button type="submit">Создать</button>
-
-    {{-- <a href="{{ route('dashboard') }}">Back to Dashboard</a> --}}
-</form>
-</div>
-<div>
+        <button type="submit">Обновить</button>
+    </form>
     <a href="{{ route('admin.user.index') }}">Обратно к списку пользователей</a>
+    {{-- <a href="{{ route('dashboard') }}">Back to Dashboard</a> --}}
 </div>
 @endsection
-

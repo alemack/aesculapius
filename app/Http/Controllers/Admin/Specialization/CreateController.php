@@ -1,5 +1,7 @@
 <?php
-namespace App\Http\Controllers\Admin\User;
+namespace App\Http\Controllers\Admin\Specialization;
+
+
 
 
 
@@ -7,7 +9,6 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Specialization;
 
 class CreateController extends Controller
 {
@@ -15,7 +16,6 @@ class CreateController extends Controller
     {
         // dd(22);
         $roles = Role::all();
-        // $specializations = Specialization::all();
         return view('admin.user.create', compact('roles'));
     }
 }
