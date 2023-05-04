@@ -9,6 +9,7 @@
 
     <title>{{ config('app.main', 'Главная') }}</title>
     <title>{{ config('app.users', 'Пользователи') }}</title>
+    <title>{{ config('app.schedules', 'Расписание') }}</title>
 
     {{-- connected bootstrap and js --}}
     {{-- @include('layouts.cdn') --}}
@@ -34,6 +35,9 @@
                 @can('view', auth()->user())
                 <a class="navbar-brand" href="{{route('admin.user.index')}}">
                     {{ config('app.users', 'Пользователи') }}
+                </a>
+                <a class="navbar-brand" href="{{route('admin.schedule.index')}}">
+                    {{ config('app.schedules', 'Расписание') }}
                 </a>
                 @endcan
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

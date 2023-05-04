@@ -3,13 +3,14 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+// use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\User\EditController;
 use App\Http\Controllers\Admin\User\ShowController;
-use App\Http\Controllers\Admin\User\IndexController;
 use App\Http\Controllers\Admin\User\StoreController;
 use App\Http\Controllers\Admin\User\CreateController;
 use App\Http\Controllers\Admin\User\UpdateController;
 use App\Http\Controllers\Admin\User\DestroyController;
+use App\Http\Controllers\Admin\User\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,5 +45,14 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin', 'middleware'=> 'admin']
         Route::get('users/{user}/edit', [EditController::class, '__invoke'])->name('admin.user.edit');
         Route::patch('users/{user}', [UpdateController::class, '__invoke'])->name('admin.user.update');
         Route::delete('users/{user}', [DestroyController::class, '__invoke'])->name('admin.user.delete');
+    });
+    Route::group(['prefix'=>'schedule', 'namespace' => 'Schedule'], function () {
+        Route::get('/schedules', [App\Http\Controllers\Admin\Schedule\IndexController::class, '__invoke'])->name('admin.schedule.index');
+        Route::get('/schedules/create', [App\Http\Controllers\Admin\Schedule\CreateController::class, '__invoke'])->name('admin.schedule.create');
+        Route::post('schedules', [App\Http\Controllers\Admin\Schedule\StoreController::class, '__invoke'])->name('admin.schedule.store');
+        Route::get('/schedules/{schedule}', [App\Http\Controllers\Admin\Schedule\ShowController::class, '__invoke'])->name('admin.schedule.show');
+        Route::get('schedules/{schedule}/edit', [App\Http\Controllers\Admin\Schedule\EditController::class, '__invoke'])->name('admin.schedule.edit');
+        Route::patch('schedules/{schedule}', [App\Http\Controllers\Admin\Schedule\UpdateController::class, '__invoke'])->name('admin.schedule.update');
+        Route::delete('schedules/{schedule}', [App\Http\Controllers\Admin\Schedule\DestroyController::class, '__invoke'])->name('admin.schedule.delete');
     });
 });
