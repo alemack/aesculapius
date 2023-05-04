@@ -37,6 +37,9 @@
                                         <button class="btn btn-danger" type="submit">Удалить</button>
                                     </form>
                                 </div>
+                                <div>
+                                    <button type="button" class="btn btn-light"><a href="">Сделать врачом</a></button>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

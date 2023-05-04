@@ -1,16 +1,14 @@
 <?php
 namespace App\Http\Controllers\Admin\Doctor;
 
-
-
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Doctor;
 
 class ShowController extends Controller
 {
-    public function __invoke(User $user)
+    public function __invoke(Doctor $doctor)
     {
-        return view('admin.user.show', compact('user'));
+        return view('admin.doctor.show', compact('doctor'));
     }
 }
