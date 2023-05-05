@@ -1,27 +1,20 @@
 <?php
 namespace App\Http\Controllers\Admin\Specialization;
 
-
-
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Specialization;
 
 class UpdateController extends Controller
 {
-    public function __invoke(User $user)
+    public function __invoke(Specialization $specialization)
     {
         $data = request()->validate(
             [
                 'name'=>'string',
-                'email'=>'string',
-                'password'=>'string',
-                'role'=>'',
             ]
         );
-        // dd($data);
-        $user->update($data);
-        return redirect()->route('admin.user.show', $user->id);
+        $specialization->update($data);
 
+        return redirect()->route('admin.specialization.show', $specialization->id);
     }
 }

@@ -1,16 +1,13 @@
 <?php
 namespace App\Http\Controllers\Admin\Specialization;
 
-
-
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Specialization;
 
 class ShowController extends Controller
 {
-    public function __invoke(User $user)
+    public function __invoke(Specialization $specialization)
     {
-        return view('admin.user.show', compact('user'));
+        return view('admin.specialization.show', compact('specialization'));
     }
 }
