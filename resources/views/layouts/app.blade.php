@@ -12,6 +12,7 @@
     <title>{{ config('app.doctors', 'Врачи') }}</title>
     <title>{{ config('app.specializations', 'Специализации') }}</title>
     <title>{{ config('app.schedules', 'Расписание') }}</title>
+    <title>{{ config('app.patientSchedules', 'Расписание') }}</title>
 
     {{-- connected bootstrap and js --}}
     {{-- @include('layouts.cdn') --}}
@@ -33,6 +34,9 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.main', 'Главная') }}
+                </a>
+                <a class="navbar-brand" href="{{route('patient.schedule.index')}}">
+                    {{ config('app.patientSchedules', 'Расписание') }}
                 </a>
                 @can('view', auth()->user())
                 <a class="navbar-brand" href="{{route('admin.user.index')}}">

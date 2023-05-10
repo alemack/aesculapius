@@ -74,3 +74,15 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin', 'middleware'=> 'admin']
         Route::delete('specializations/{specialization}', [App\Http\Controllers\Admin\Specialization\DestroyController::class, '__invoke'])->name('admin.specialization.delete');
     });
 });
+
+Route::group(['prefix'=>'patient', 'namespace'=>'Patient'], function() {
+    Route::group(['prefix'=>'schedule', 'namespace' => 'Schedule'], function () {
+        Route::get('/schedules', [App\Http\Controllers\Patient\Schedule\IndexController::class, '__invoke'])->name('patient.schedule.index');
+        Route::get('/schedules/create', [App\Http\Controllers\Patient\Schedule\CreateController::class, '__invoke'])->name('patient.schedule.create');
+        Route::post('schedules', [App\Http\Controllers\Admin\Patient\StoreController::class, '__invoke'])->name('patient.schedule.store');
+        Route::get('/schedules/{schedule}', [App\Http\Controllers\Patient\Schedule\ShowController::class, '__invoke'])->name('patient.schedule.show');
+        Route::get('schedules/{schedule}/edit', [App\Http\Controllers\Patient\Schedule\EditController::class, '__invoke'])->name('patient.schedule.edit');
+        Route::patch('schedules/{schedule}', [App\Http\Controllers\Patient\Schedule\UpdateController::class, '__invoke'])->name('patient.schedule.update');
+        Route::delete('schedules/{schedule}', [App\Http\Controllers\Patient\Schedule\DestroyController::class, '__invoke'])->name('patient.schedule.delete');
+    });
+});
