@@ -17,7 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('day_of_week');
             $table->time('start_time');
             $table->time('end_time');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

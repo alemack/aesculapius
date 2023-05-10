@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Schedule extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $guarded = [];
     protected $table = 'schedules';

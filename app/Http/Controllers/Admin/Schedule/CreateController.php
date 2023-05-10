@@ -1,20 +1,14 @@
 <?php
 namespace App\Http\Controllers\Admin\Schedule;
 
-
-
-
-use App\Models\Role;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Doctor;
 
 class CreateController extends Controller
 {
     public function __invoke()
     {
-        // dd(22);
-        $roles = Role::all();
-        return view('admin.user.create', compact('roles'));
+        $doctors = Doctor::all();
+        return view('admin.schedule.create', compact('doctors'));
     }
 }

@@ -1,16 +1,13 @@
 <?php
 namespace App\Http\Controllers\Admin\Schedule;
 
-
-
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\Schedule;
 use App\Http\Controllers\Controller;
 
 class ShowController extends Controller
 {
-    public function __invoke(User $user)
+    public function __invoke(Schedule $schedule)
     {
-        return view('admin.user.show', compact('user'));
+        return view('admin.schedule.show', compact('schedule'));
     }
 }

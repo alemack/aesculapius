@@ -7,29 +7,37 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Schedule;
 use Symfony\Component\VarDumper\Caster\RedisCaster;
+
+use function PHPSTORM_META\map;
 
 class StoreController extends Controller
 {
     public function __invoke(Request $request)
     {
-        // dd(32);
+        // dd(22);
         $data = request()->validate(
             [
-                'name'=>'string',
-                'email'=>'string',
-                'password'=>'string',
-                'role'=>'',
+                'doctor_id'=>'string',
+                'day_of_week'=>'',
+                'start_time'=>'',
+                'end_time'=>'',
             ]
         );
-        // dd(22);
-        $user = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
-            'role'=>$request->input('role'),
+
+        Schedule::firstOrCreate([
+            'doctor_id'=>$request->input('doctor_id'),
+            'day_of_week'=>$request->input('day_of_week')
+        ],[
+            'doctor_id'=>$request->input('doctor_id'),
+            'day_of_week'=>$request->input('day_of_week'),
+            'start_time'=>$request->input('start_time'),
+            'end_time'=>$request->input('end_time'),
         ]);
-        // $user = User::create($data);
-        return redirect()->route('admin.user.index');
+        // dd($data);
+        // $schedule = Schedule::create($data);
+
+        return redirect()->route('admin.schedule.index');
     }
 }
