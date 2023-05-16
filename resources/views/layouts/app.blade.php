@@ -35,23 +35,49 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.main', 'Главная') }}
                 </a>
-                <a class="navbar-brand" href="{{route('patient.schedule.index')}}">
+                {{-- @can('view', auth()->user())
+                <a class="navbar-brand" href="{{ route('patient.schedule.index') }}">
                     {{ config('app.patientSchedules', 'Расписание') }}
                 </a>
-                @can('view', auth()->user())
-                <a class="navbar-brand" href="{{route('admin.user.index')}}">
+                 @elsecan('view', auth()->user())
+                <a class="navbar-brand" href="{{ route('admin.user.index') }}">
                     {{ config('app.users', 'Пользователи') }}
                 </a>
-                <a class="navbar-brand" href="{{route('admin.doctor.index')}}">
+                <a class="navbar-brand" href="{{ route('admin.doctor.index') }}">
                     {{ config('app.doctors', 'Врачи') }}
                 </a>
-                <a class="navbar-brand" href="{{route('admin.specialization.index')}}">
+                <a class="navbar-brand" href="{{ route('admin.specialization.index') }}">
                     {{ config('app.specializations', 'Специализации') }}
                 </a>
-                <a class="navbar-brand" href="{{route('admin.schedule.index')}}">
+                <a class="navbar-brand" href="{{ route('admin.schedule.index') }}">
                     {{ config('app.schedules', 'Расписание') }}
                 </a>
-                @endcan
+                @endcan --}}
+            @auth
+                @if(auth()->user()->role==='patient')
+                    <a class="navbar-brand" href="{{route('patient.schedule.index')}}">
+                        {{ config('app.patientSchedules', 'Расписание') }}
+                    </a>
+                @elseif(auth()->user()->role==='doctor')
+                    <a href="">wd</a>
+                @elseif(auth()->user()->role==='admin')
+                    <a class="navbar-brand" href="{{route('admin.user.index')}}">
+                        {{ config('app.users', 'Пользователи') }}
+                    </a>
+                    <a class="navbar-brand" href="{{route('admin.doctor.index')}}">
+                        {{ config('app.doctors', 'Врачи') }}
+                    </a>
+                    <a class="navbar-brand" href="{{route('admin.specialization.index')}}">
+                        {{ config('app.specializations', 'Специализации') }}
+                    </a>
+                    <a class="navbar-brand" href="{{route('admin.schedule.index')}}">
+                        {{ config('app.schedules', 'Расписание') }}
+                    </a>
+                @endif
+            @endauth
+
+
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

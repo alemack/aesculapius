@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminPanelMiddleware;
+use App\Http\Middleware\PatientPanelMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -66,5 +67,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         // admin panel
         'admin' => AdminPanelMiddleware::class,
+        // patient panel
+        'patient' => PatientPanelMiddleware::class,
     ];
 }
