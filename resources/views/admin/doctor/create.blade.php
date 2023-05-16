@@ -16,10 +16,13 @@
             </ul>
         </div>
     @endif
-
-        <div>
-            <label for="name">ФИО:</label>
-            <input type="text" id="name" name="name" value="{{ old('name') }}" required autofocus>
+        <div class="form-group">
+            <label for="user_id">ФИО:</label>
+            <select class="form-control" id="user_id" name="user_id" required autofocus>
+                @foreach ($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
             <label for="specializations">Специализация</label>

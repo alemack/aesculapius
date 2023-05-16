@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $doctor->name }}</h5>
+                    <h5 class="card-title">{{ $doctor->user->name }}</h5>
                     <p class="card-text"><strong>Дата создания: </strong>{{ $doctor->created_at }}</p>
                 </div>
             </div>

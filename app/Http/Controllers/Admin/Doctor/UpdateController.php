@@ -14,15 +14,15 @@ class UpdateController extends Controller
     {
         $data = request()->validate(
             [
-                'name'=>'string',
+                // 'name'=>'string',
                 'specializations'=>'',
             ]
         );
 
         $specializations = $data['specializations'];
-        unset($data['specializations']);
+        // unset($data['specializations']);
 
-        $doctor->update($data);
+        // $doctor->update($data);
         $doctor->specializations()->sync($specializations);
 
         return redirect()->route('admin.doctor.show', $doctor->id);

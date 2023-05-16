@@ -11,7 +11,7 @@ class StoreController extends Controller
     {
         $data = request()->validate(
             [
-                'name'=>'string',
+                'user_id'=>'',
                 'specializations'=>'',
             ]
         );

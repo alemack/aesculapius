@@ -17,10 +17,18 @@
     <form method="POST" action="{{ route('admin.doctor.update', $doctor->id) }}">
         @csrf
         @method('patch')
-        <div>
+        {{-- <div>
             <label for="name">ФИО:</label>
-            <input type="text" id="name" name="name" value="{{ old('name', $doctor->name) }}" required autofocus>
+            <input type="text" id="name" name="name" value="{{ old('name', $doctor->user->name) }}" required autofocus>
+        </div> --}}
+        <div>
+            <p>{{ $doctor->user->name }}</p>
         </div>
+        {{-- <div>
+            <label for="name">ФИО:</label>
+            <input type="text" id="name" name="name" value="{{ $doctor->user->name }}" readonly>
+        </div> --}}
+
         <div class="form-group">
             <label for="specializations">Специализация</label>
             <select multiple class="form-control" id="specializations" name="specializations[]">
