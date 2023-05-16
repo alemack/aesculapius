@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Schedule;
 use App\Models\Specialization;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +18,7 @@ class Doctor extends Model
     protected $table = 'doctors';
 
     protected $fillable = [
-        'name', 'specialization',
+        'user_id',
     ];
 
     public function schedules()
@@ -28,5 +29,9 @@ class Doctor extends Model
     public function specializations()
     {
         return $this->belongsToMany(Specialization::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 }

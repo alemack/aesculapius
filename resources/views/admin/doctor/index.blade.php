@@ -22,7 +22,7 @@
                 <tbody>
                     @foreach ($doctors as $doctor)
                         <tr>
-                            <td>{{ $doctor->name }}</td>
+                            <td>{{ $doctor->user->name }}</td>
                             <td>{{  json_decode(($doctor->specializations->pluck('name')),true)[0]}}</td>
                             <td>
                                 <div>

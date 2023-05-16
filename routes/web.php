@@ -6,11 +6,12 @@ use App\Http\Controllers\HomeController;
 // use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\User\EditController;
 use App\Http\Controllers\Admin\User\ShowController;
+use App\Http\Controllers\Admin\User\IndexController;
 use App\Http\Controllers\Admin\User\StoreController;
 use App\Http\Controllers\Admin\User\CreateController;
 use App\Http\Controllers\Admin\User\UpdateController;
 use App\Http\Controllers\Admin\User\DestroyController;
-use App\Http\Controllers\Admin\User\IndexController;
+use App\Http\Controllers\Admin\User\MakeDoctorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,9 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin', 'middleware'=> 'admin']
         Route::get('users/{user}/edit', [EditController::class, '__invoke'])->name('admin.user.edit');
         Route::patch('users/{user}', [UpdateController::class, '__invoke'])->name('admin.user.update');
         Route::delete('users/{user}', [DestroyController::class, '__invoke'])->name('admin.user.delete');
+
+        Route::get('/users/{user}/makedoctor', [MakeDoctorController::class, 'create'])->name('admin.user.make_doctor.create');
+        Route::post('/users/makedoctor', [MakeDoctorController::class, 'store'])->name('admin.user.make_doctor.store');
     });
     Route::group(['prefix'=>'schedule', 'namespace' => 'Schedule'], function () {
         Route::get('/schedules', [App\Http\Controllers\Admin\Schedule\IndexController::class, '__invoke'])->name('admin.schedule.index');

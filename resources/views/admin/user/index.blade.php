@@ -38,7 +38,7 @@
                                     </form>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-light"><a href="">Сделать врачом</a></button>
+                                    <button type="button" class="btn btn-light"><a href="{{route('admin.user.make_doctor.create', $user->id)}}">Сделать врачом</a></button>
                                 </div>
                             </td>
                         </tr>
