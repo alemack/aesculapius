@@ -26,7 +26,7 @@
                     @foreach ($schedules as $schedule)
                         <tr>
                             <td>{{ $schedule->id }}</td>
-                            <td>{{ $schedule->doctor->name }}</td>
+                            <td>{{ $schedule->doctor->user->name }}</td>
                             <td>{{ dayOfWeekName($schedule->day_of_week) }}</td>
                             <td>{{ $schedule->start_time }}</td>
                             <td>{{ $schedule->end_time }}</td>

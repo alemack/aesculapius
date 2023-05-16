@@ -11,7 +11,7 @@
                 <tbody>
                     <tr>
                         <td>Врач:</td>
-                        <td>{{ $schedule->doctor->name }}</td>
+                        <td>{{ $schedule->doctor->user->name }}</td>
                     </tr>
                     <tr>
                         <td>День недели:</td>

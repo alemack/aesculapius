@@ -15,7 +15,7 @@
                     <label for="doctor_id">Врач</label>
                     <select class="form-select" name="doctor_id" id="doctor_id">
                         @foreach ($doctors as $doctor)
-                            <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+                            <option value="{{ $doctor->id }}">{{ $doctor->user->name }}</option>
                         @endforeach
                     </select>
                 </div>

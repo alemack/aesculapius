@@ -19,14 +19,23 @@
             <form action="{{ route('admin.schedule.update', $schedule->id) }}" method="POST">
                 @csrf
                 @method('patch')
+                {{-- <div>
+                    <p>{{$schedule->doctor->user->name}}</p>
+                </div> --}}
                 <div class="form-group">
+                    <label for="doctor_id">Врач</label>
+                    <input type="text" id="doctor_id" name="doctor_id" value="{{ $schedule->doctor->user->name }}" readonly>
+                    <input type="hidden" name="doctor_id" value="{{ $schedule->doctor->id }}">
+                </div>
+
+                {{-- <div class="form-group">
                     <label for="doctor_id">Врач</label>
                     <select class="form-control" id="doctor_id" name="doctor_id">
                         @foreach($doctors as $doctor)
                         <option value="{{ $doctor->id }}" {{ $schedule->doctor_id == $doctor->id ? 'selected' : '' }}>{{ $doctor->name }}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <label for="day_of_week">День недели</label>
                     <select class="form-control" id="day_of_week" name="day_of_week">
