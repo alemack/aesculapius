@@ -37,12 +37,8 @@
                     </select>
                 </div> --}}
                 <div class="form-group">
-                    <label for="day_of_week">День недели</label>
-                    <select class="form-control" id="day_of_week" name="day_of_week">
-                        @foreach($daysOfWeek as $key => $value)
-                        <option value="{{ $key }}" {{ $schedule->day_of_week == $key ? 'selected' : '' }}>{{ $value }}</option>
-                        @endforeach
-                    </select>
+                    <label for="date">Дата</label>
+                    <input type="date" name="date" class="form-control" id="date">
                 </div>
                 <div class="form-group">
                     <label for="start_time">Начало приема</label>
@@ -51,6 +47,10 @@
                 <div class="form-group">
                     <label for="end_time">Конец приема</label>
                     <input type="time" class="form-control" id="end_time" name="end_time" value="{{ $schedule->end_time }}" required>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="is_available" name="is_available">
+                    <label class="form-check-label" for="is_available">Принимает в это время</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Сохранить</button>
                 <button type="button" class="btn btn-light"><a href="{{ route('admin.schedule.index') }}">Отмена</a></button>

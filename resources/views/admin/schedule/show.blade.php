@@ -14,8 +14,8 @@
                         <td>{{ $schedule->doctor->user->name }}</td>
                     </tr>
                     <tr>
-                        <td>День недели:</td>
-                        <td>{{ dayOfWeekName($schedule->day_of_week) }}</td>
+                        <td>Дата</td>
+                        <td>{{$schedule->date}}</td>
                     </tr>
                     <tr>
                         <td>Начало приема:</td>
@@ -24,6 +24,10 @@
                     <tr>
                         <td>Конец приема:</td>
                         <td>{{ $schedule->end_time }}</td>
+                    </tr>
+                    <tr>
+                        <td>Принимает ли</td>
+                        <td>{{$schedule->is_available ? "Принимает" : "Не принимает"}}</td>
                     </tr>
                 </tbody>
             </table>

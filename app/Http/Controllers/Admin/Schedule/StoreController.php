@@ -19,24 +19,32 @@ class StoreController extends Controller
         // dd(22);
         $data = request()->validate(
             [
-                'doctor_id'=>'string',
-                'day_of_week'=>'',
-                'start_time'=>'',
-                'end_time'=>'',
+                'doctor_id' => '',
+                'date' => '',
+                'start_time' => '',
+                'end_time' => '',
+                'is_available'=>'',
             ]
         );
-
-        Schedule::firstOrCreate([
-            'doctor_id'=>$request->input('doctor_id'),
-            'day_of_week'=>$request->input('day_of_week')
-        ],[
-            'doctor_id'=>$request->input('doctor_id'),
-            'day_of_week'=>$request->input('day_of_week'),
-            'start_time'=>$request->input('start_time'),
-            'end_time'=>$request->input('end_time'),
-        ]);
         // dd($data);
-        // $schedule = Schedule::create($data);
+
+        // $isAvailable = $request->input('is_available', 0);
+        $isAvailable = $request->has('is_available') ? 1 : 0;
+        // dd($isAvailable);
+        // dd($data, $isAvailable);
+        Schedule::firstOrCreate([
+            'doctor_id' => $data['doctor_id'],
+            'date' => $data['date'],
+            'start_time' => $data['start_time'],
+            'end_time' => $data['end_time'],
+        ],
+        [
+            'doctor_id' => $data['doctor_id'],
+            'date' => $data['date'],
+            'start_time' => $data['start_time'],
+            'end_time' => $data['end_time'],
+            'is_available' => $isAvailable,
+        ]);
 
         return redirect()->route('admin.schedule.index');
     }

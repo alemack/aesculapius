@@ -11,19 +11,23 @@ class UpdateController extends Controller
     {
         $data = request()->validate(
             [
-                'doctor_id'=>'string',
-                'day_of_week'=>'required',
-                'start_time'=>'required',
-                'end_time'=>'required',
+                'doctor_id' => '',
+                'date' => '',
+                'start_time' => '',
+                'end_time' => '',
+                'is_available'=>'',
             ]
         );
 
+        $isAvailable = $request->has('is_available') ? 1 : 0;
+
         $schedule =Schedule::updateOrCreate([
             'doctor_id'=>$request->input('doctor_id'),
-            'day_of_week'=>$request->input('day_of_week')
+            'date'=>$request->input('date')
         ],[
-            'start_time'=>$request->input('start_time'),
-            'end_time'=>$request->input('end_time'),
+            'start_time' => $data['start_time'],
+            'end_time' => $data['end_time'],
+            'is_available' => $isAvailable,
         ]);
 
         // $schedule->update($data);

@@ -16,9 +16,10 @@
                     <tr>
                         <th>№</th>
                         <th>Врач</th>
-                        <th>День недели</th>
+                        <th>Дата</th>
                         <th>Начало</th>
                         <th>Конец</th>
+                        <th>Доступ</th>
                         <th>Действия</th>
                     </tr>
                 </thead>
@@ -27,9 +28,10 @@
                         <tr>
                             <td>{{ $schedule->id }}</td>
                             <td>{{ $schedule->doctor->user->name }}</td>
-                            <td>{{ dayOfWeekName($schedule->day_of_week) }}</td>
+                            <td>{{ $schedule->date }}</td>
                             <td>{{ $schedule->start_time }}</td>
                             <td>{{ $schedule->end_time }}</td>
+                            <td>{{$schedule->is_available ? "Принимает" : "Не принимает"}}</td>
                             <td>
                                 <div>
                                     <button type="button" class="btn btn-light"><a href="{{route('admin.schedule.show', $schedule->id)}}">Посмотреть</a></button>
