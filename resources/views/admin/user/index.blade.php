@@ -40,6 +40,9 @@
                                 <div>
                                     <button type="button" class="btn btn-light"><a href="{{route('admin.user.make_doctor.create', $user->id)}}">Сделать врачом</a></button>
                                 </div>
+                                <div>
+                                    <button type="button" class="btn btn-light"><a href="{{route('admin.user.make_patient.create', $user->id)}}">Сделать пациентом</a></button>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

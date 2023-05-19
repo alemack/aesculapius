@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin\Doctor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
+use App\Models\Patient;
 
 class IndexController extends Controller
 {
