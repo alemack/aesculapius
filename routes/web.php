@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\User\UpdateController;
 use App\Http\Controllers\Admin\User\DestroyController;
 use App\Http\Controllers\Admin\User\MakeDoctorController;
 use App\Http\Controllers\Admin\User\MakePatientController;
+use App\Http\Controllers\Patient\Appointment\MakeAppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,14 +85,30 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin', 'middleware'=> 'admin']
     });
 });
 
-Route::group(['prefix'=>'patient', 'namespace'=>'Patient'], function() {
+Route::group(['prefix'=>'patient', 'namespace'=>'Patient', 'middleware'=> 'patient'], function() {
     Route::group(['prefix'=>'schedule', 'namespace' => 'Schedule'], function () {
         Route::get('/schedules', [App\Http\Controllers\Patient\Schedule\IndexController::class, '__invoke'])->name('patient.schedule.index');
-        Route::get('/schedules/create', [App\Http\Controllers\Patient\Schedule\CreateController::class, '__invoke'])->name('patient.schedule.create');
-        Route::post('schedules', [App\Http\Controllers\Admin\Patient\StoreController::class, '__invoke'])->name('patient.schedule.store');
+        // Route::get('/schedules/create', [App\Http\Controllers\Patient\Schedule\CreateController::class, '__invoke'])->name('patient.schedule.create');
         Route::get('/schedules/{schedule}', [App\Http\Controllers\Patient\Schedule\ShowController::class, '__invoke'])->name('patient.schedule.show');
-        Route::get('schedules/{schedule}/edit', [App\Http\Controllers\Patient\Schedule\EditController::class, '__invoke'])->name('patient.schedule.edit');
-        Route::patch('schedules/{schedule}', [App\Http\Controllers\Patient\Schedule\UpdateController::class, '__invoke'])->name('patient.schedule.update');
-        Route::delete('schedules/{schedule}', [App\Http\Controllers\Patient\Schedule\DestroyController::class, '__invoke'])->name('patient.schedule.delete');
+        Route::get('/schedules/{schedule}/makeappointment', [App\Http\Controllers\Patient\Schedule\MakeAppointmentController::class, 'create'])->name('patient.schedule.make_appointment.create');
+        // Route::get('/schedules/{schedule}', [App\Http\Controllers\Patient\Schedule\ShowController::class, '__invoke'])->name('patient.schedule.show');
+
+        // Route::post('schedules/makeappointment', [App\Http\Controllers\Patient\schedule\MakeAppointmentController::class, 'store'])->name('patient.appointment.make_appointment.store');
+        // Route::get('/schedules/{schedule}/makeappointment', [App\Http\Controllers\Patient\Appointment\MakeAppointmentController::class, 'create'])->name('patient.appointment.make_appointment.create');
+
+    });
+
+    Route::group(['prefix'=>'appointment', 'namespace' => 'Appointment'], function () {
+        // Route::post('appointments/makeappointment', [App\Http\Controllers\Patient\Appointment\MakeAppointmentController::class, 'store'])->name('patient.appointment.make_appointment.store');
+        // Route::get('/appointments/{appointment}/makeappointment', [App\Http\Controllers\Patient\Appointment\MakeAppointmentController::class, 'create'])->name('patient.appointment.make_appointment.create');
+
+        Route::get('/appointments', [App\Http\Controllers\Patient\Appointment\IndexController::class, '__invoke'])->name('patient.appointment.index');
+
+        Route::get('/appointments/create', [App\Http\Controllers\Patient\Appointment\CreateController::class, '__invoke'])->name('patient.appointment.create');
+        Route::post('appointments', [App\Http\Controllers\Admin\Patient\Appointment\StoreController::class, '__invoke'])->name('patient.appointment.store');
+        Route::get('/appointments/{appointment}', [App\Http\Controllers\Patient\Appointment\ShowController::class, '__invoke'])->name('patient.appointment.show');
+        Route::get('appointments/{appointment}/edit', [App\Http\Controllers\Patient\Appointment\EditController::class, '__invoke'])->name('patient.appointment.edit');
+        Route::patch('appointments/{appointment}', [App\Http\Controllers\Patient\Appointment\UpdateController::class, '__invoke'])->name('patient.appointment.update');
+        Route::delete('appointments/{appointment}', [App\Http\Controllers\Patient\Appointment\DestroyController::class, '__invoke'])->name('patient.appointment.delete');
     });
 });
