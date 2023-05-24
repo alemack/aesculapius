@@ -1,19 +1,22 @@
 <?php
 namespace App\Http\Controllers\Patient\Schedule;
 
+use App\Models\Doctor;
+use App\Models\Schedule;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Appointment;
-use App\Models\Schedule;
+use Illuminate\Support\Facades\Auth;
 
 class MakeAppointmentController extends Controller
 {
     public function create(Schedule $schedule, Request $request)
     {
-        // dd($request);
-        // dd('wddw');
-        dd($schedule->doctor->user->name);
-        return view('admin.user.makeDoctor', compact('schedule'));
+        $user = Auth()->user();
+        // dd($user);
+        // dd($schedule->id);
+        // dd($)
+        return view('patient.schedule.makeAppointment', compact('schedule', 'user'));
     }
 
     public function store(Request $request)
@@ -21,11 +24,13 @@ class MakeAppointmentController extends Controller
         // dd($request);
         $data = request()->validate(
             [
+                'patient_id'=>'',
                 'schedule_id'=>'',
-                'user_id'=>'',
+                'status'=>'',
             ]
         );
 
+        // dd($data);
         Appointment::create($data);
         return redirect()->route('patient.appointment.index');
     }

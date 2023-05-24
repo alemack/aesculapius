@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-// use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\User\EditController;
 use App\Http\Controllers\Admin\User\ShowController;
 use App\Http\Controllers\Admin\User\IndexController;
@@ -13,7 +12,6 @@ use App\Http\Controllers\Admin\User\UpdateController;
 use App\Http\Controllers\Admin\User\DestroyController;
 use App\Http\Controllers\Admin\User\MakeDoctorController;
 use App\Http\Controllers\Admin\User\MakePatientController;
-use App\Http\Controllers\Patient\Appointment\MakeAppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,12 +30,6 @@ Route::get('/', function () {
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-// Route::get('/users', [UserController::class, 'index'])->name('user.index');
-
-// Route::group(['namespace'=>'Admin', 'prefix'=>'admin', 'middleware'=>'admin'], function() {
-//     Route::get('/users', [AdminController::class, 'index'])->name('admin.user.index');
-// });
 
 Route::group(['prefix'=>'admin', 'namespace' => 'Admin', 'middleware'=> 'admin'], function() {
     Route::group(['prefix'=>'user', 'namespace' => 'User'], function () {
@@ -91,6 +83,7 @@ Route::group(['prefix'=>'patient', 'namespace'=>'Patient', 'middleware'=> 'patie
         // Route::get('/schedules/create', [App\Http\Controllers\Patient\Schedule\CreateController::class, '__invoke'])->name('patient.schedule.create');
         Route::get('/schedules/{schedule}', [App\Http\Controllers\Patient\Schedule\ShowController::class, '__invoke'])->name('patient.schedule.show');
         Route::get('/schedules/{schedule}/makeappointment', [App\Http\Controllers\Patient\Schedule\MakeAppointmentController::class, 'create'])->name('patient.schedule.make_appointment.create');
+        Route::post('/schedules/makeappointment', [App\Http\Controllers\Patient\Schedule\MakeAppointmentController::class, 'store'])->name('patient.schedule.make_appointment.store');
         // Route::get('/schedules/{schedule}', [App\Http\Controllers\Patient\Schedule\ShowController::class, '__invoke'])->name('patient.schedule.show');
 
         // Route::post('schedules/makeappointment', [App\Http\Controllers\Patient\schedule\MakeAppointmentController::class, 'store'])->name('patient.appointment.make_appointment.store');

@@ -17,7 +17,7 @@ class Appointment extends Model
     protected $table = 'appointments';
 
     protected $fillable = [
-        'user_id',
+        'patient_id',
         'schedule_id',
         'status',
     ];
