@@ -14,6 +14,8 @@
     <title>{{ config('app.schedules', 'Расписание') }}</title>
     <title>{{ config('app.patientSchedules', 'Расписание') }}</title>
     <title>{{ config('app.patientAppointment', 'Мои записи на прием') }}</title>
+    <title>{{ config('app.doctorSchedules', 'Расписание') }}</title>
+    <title>{{ config('app.doctorAppointment', 'Записи ко мне') }}</title>
 
     {{-- connected bootstrap and js --}}
     {{-- @include('layouts.cdn') --}}
@@ -63,7 +65,12 @@
                         {{ config('app.patientAppointment', 'Мои записи на прием') }}
                     </a>
                 @elseif(auth()->user()->role==='doctor')
-                    <a href="">wd</a>
+                    <a class="navbar-brand" href="{{route('doctor.schedule.index')}}">
+                        {{ config('app.doctorSchedules', 'Расписание') }}
+                    </a>
+                    <a class="navbar-brand" href="{{route('doctor.appointment.index')}}">
+                        {{ config('app.doctorAppointment', 'Записи ко мне') }}
+                    </a>
                 @elseif(auth()->user()->role==='admin')
                     <a class="navbar-brand" href="{{route('admin.user.index')}}">
                         {{ config('app.users', 'Пользователи') }}

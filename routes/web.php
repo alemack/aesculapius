@@ -89,3 +89,17 @@ Route::group(['prefix'=>'patient', 'namespace'=>'Patient', 'middleware'=> 'patie
         Route::get('/appointments', [App\Http\Controllers\Patient\Appointment\IndexController::class, '__invoke'])->name('patient.appointment.index');
     });
 });
+Route::group(['prefix'=>'doctor', 'namespace'=>'Doctor'], function() {
+    Route::group(['prefix'=>'schedule', 'namespace' => 'Schedule'], function () {
+        Route::get('/schedules', [App\Http\Controllers\Doctor\Schedule\IndexController::class, '__invoke'])->name('doctor.schedule.index');
+    });
+
+    Route::group(['prefix'=>'appointment', 'namespace' => 'Appointment'], function () {
+        Route::get('/appointments', [App\Http\Controllers\Doctor\Appointment\IndexController::class, '__invoke'])->name('doctor.appointment.index');
+        Route::get('/appointments/{appointment}', [App\Http\Controllers\Doctor\Appointment\ShowController::class, '__invoke'])->name('doctor.appointment.show');
+
+        // Route::get('/appointments/{appointment}', [App\Http\Controllers\Doctor\Appointment\MedicalCard::class, 'show'])->name('doctor.medicalCard.show');
+        Route::get('/appointments/{appointment}/medicalRecord', [App\Http\Controllers\Doctor\Appointment\MedicalCard::class, 'create'])->name('doctor.medicalCard.create');
+        Route::post('/appointments/medicalRecord', [App\Http\Controllers\Doctor\Appointment\MedicalCard::class, 'store'])->name('doctor.medicalCard.store');
+    });
+});
