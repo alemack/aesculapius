@@ -7,10 +7,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1>Администрирование расписания</h1>
-            <div>
+            <h1>Просмотр рабочего расписания</h1>
+            {{-- <div>
                 <a href="{{ route('admin.schedule.create') }}" class="btn btn-primary mb-3">Добавить день</a>
-            </div>
+            </div> --}}
             <table class="table">
                 <thead>
                     <tr>
@@ -36,13 +36,13 @@
                                 <div>
                                     <button type="button" class="btn btn-outline-primary"><a href="{{ route('patient.schedule.show', $schedule->id) }}">Просмотр</a></button>
                                 </div>
-                                <div>
+                                {{-- <div>
                                     <form method="POST" action="{{ route('admin.schedule.delete', $schedule->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-outline-danger" type="submit">Удалить</button>
                                     </form>
-                                </div>
+                                </div> --}}
                             </td>
                         </tr>
                     @endforeach
