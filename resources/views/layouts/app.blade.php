@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -38,6 +39,7 @@
         html,
         body {
             height: 100%;
+            /* background-color: rgb(207, 244, 252); */
         }
 
         #app {
@@ -49,6 +51,7 @@
         main {
             flex-grow: 1;
         }
+
     </style>
 </head>
 
