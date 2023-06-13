@@ -19,13 +19,13 @@
 
         <div>
             <label for="patient_id">Имя пациента:</label>
-            <input type="text" id="patient_id" name="patient_id" value="{{ old('patient_id', $user->id) }}" required autofocus>
+            <input type="text" id="patient_id" name="patient_id" value="{{ old('patient_id', $user->patient->id) }}" required autofocus>
         </div>
         <div>
             <p>{{$user->id}}</p>
         </div>
         <div>
-            <label for="schedule_id">Имя пациента:</label>
+            <label for="schedule_id">расписание:</label>
             <input type="text" id="schedule_id" name="schedule_id" value="{{ old('schedule_id', $schedule->id) }}" required autofocus>
         </div>
         <div>
