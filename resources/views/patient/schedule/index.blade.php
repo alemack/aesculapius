@@ -8,6 +8,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="alert alert-info text-center" role="alert">
                 Для записи по номеру телефона звоните на +7 (999) 999-99-99
             </div>

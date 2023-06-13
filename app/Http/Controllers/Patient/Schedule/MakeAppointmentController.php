@@ -21,17 +21,22 @@ class MakeAppointmentController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
-        $data = request()->validate(
-            [
-                'patient_id'=>'',
-                'schedule_id'=>'',
-                'status'=>'',
-            ]
-        );
+        $data = $request->validate([
+            'patient_id' => 'required',
+            'schedule_id' => 'required',
+            'status' => 'required',
+        ]);
 
-        // dd($data);
+        $existingAppointment = Appointment::where('schedule_id', $data['schedule_id'])
+            ->where('patient_id', $data['patient_id'])
+            ->first();
+
+        if ($existingAppointment) {
+            return redirect()->route('patient.schedule.index')->withErrors(['message' => 'Вы уже записаны на это время к этому врачу']);
+        }
+
         Appointment::create($data);
         return redirect()->route('patient.appointment.index');
     }
+
 }

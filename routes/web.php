@@ -87,6 +87,9 @@ Route::group(['prefix'=>'patient', 'namespace'=>'Patient', 'middleware'=> 'patie
 
     Route::group(['prefix'=>'appointment', 'namespace' => 'Appointment'], function () {
         Route::get('/appointments', [App\Http\Controllers\Patient\Appointment\IndexController::class, '__invoke'])->name('patient.appointment.index');
+        Route::get('/appointments/{appointment}', [App\Http\Controllers\Patient\Appointment\ShowController::class, '__invoke'])->name('patient.appointment.show');
+        Route::delete('appointments/{appointment}', [App\Http\Controllers\Patient\Appointment\DestroyController::class, '__invoke'])->name('patient.appointment.delete');
+        // Route::get('/appointments/{appointment}/cancelappointment', [App\Http\Controllers\Patient\Appointment\CancelAppointmentController::class, 'cancel'])->name('patient.appointment.cancel_appointment.cancel');
     });
 });
 Route::group(['prefix'=>'doctor', 'namespace'=>'Doctor'], function() {
