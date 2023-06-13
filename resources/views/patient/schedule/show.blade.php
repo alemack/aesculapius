@@ -9,7 +9,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="card-title">Просмотр записи расписания</h1>
+                    <h1 class="card-title">Детали расписания</h1>
                     <table class="table">
                         <tbody>
                             <tr>
@@ -19,6 +19,16 @@
                             <tr>
                                 <td>Дата:</td>
                                 <td>{{$schedule->date}}</td>
+                            </tr>
+                            <tr>
+                                <td>День недели:</td>
+                                <td>
+                                    @php
+                                        $dayOfWeek = \Carbon\Carbon::parse($schedule->date)->locale('ru')->isoFormat('dddd');
+                                        $capitalizedDayOfWeek = mb_strtoupper(mb_substr($dayOfWeek, 0, 1)) . mb_substr($dayOfWeek, 1);
+                                    @endphp
+                                    {{ $capitalizedDayOfWeek }}
+                                </td>
                             </tr>
                             <tr>
                                 <td>Начало приема:</td>
