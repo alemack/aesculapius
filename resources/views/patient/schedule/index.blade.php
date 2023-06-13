@@ -61,12 +61,12 @@
                 </table>
             @endforeach
             <div class="text-center">
-                <a href="{{ route('home') }}" class="btn btn-primary text-white">Вернуться в кабинет</a>
+                <a href="{{ route('home') }}" class="btn btn-primary text-white">Назад</a>
             </div>
         </div>
     </div>
 </div>
-<div class="mt-3">
-    {{ $schedules->links() }}
-</div>
+{{-- <div class="mt-3">
+    {{ $specializations->links() }}
+</div> --}}
 @endsection

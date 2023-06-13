@@ -11,7 +11,7 @@ class IndexController extends Controller
     {
         // $userId = Auth()->user()->id;
         // dd($userId);
-        $schedules = Schedule::paginate(30);
+        $schedules = Schedule::all();
         $specializations = Specialization::has('doctors')->get();
         return view('patient.schedule.index', compact('schedules', 'specializations'));
     }
