@@ -10,7 +10,7 @@
             <h1>История записей</h1>
             @if ($medical_records->isEmpty())
                 <div class="alert alert-info text-center" role="alert">
-                    Нет доступных записей на прием.
+                    Нет записей в медицинской карте.
                 </div>
             @else
                 <table class="table">

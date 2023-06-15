@@ -66,8 +66,8 @@
                     <div class="mt-5 d-flex justify-content-between">
                         <a href="{{ route('doctor.appointment.index') }}" class="btn btn-primary text-white">Назад</a>
                         <div>
-                            <a href="{{ route('home', $appointment->patient_id) }}" class="btn btn-success">Медицинская карта</a>
-                            <a href="{{ route('doctor.medicalCard.create', $appointment->id) }}" class="btn btn-primary ms-3">Сделать запись</a>
+                            <a href="{{ route('doctor.appointment.make_med_record.index', $appointment->patient_id) }}" class="btn btn-success">Медицинская карта</a>
+                            {{-- <a href="{{ route('doctor.appointment.make_med_record.create', $appointment->id) }}" class="btn btn-primary ms-3">Сделать запись</a> --}}
                         </div>
                     </div>
                 </div>

@@ -112,8 +112,13 @@ Route::group(['prefix'=>'doctor', 'namespace'=>'Doctor'], function() {
         Route::get('/appointments', [App\Http\Controllers\Doctor\Appointment\IndexController::class, '__invoke'])->name('doctor.appointment.index');
         Route::get('/appointments/{appointment}', [App\Http\Controllers\Doctor\Appointment\ShowController::class, '__invoke'])->name('doctor.appointment.show');
 
-        // Route::get('/appointments/{appointment}', [App\Http\Controllers\Doctor\Appointment\MedicalCard::class, 'show'])->name('doctor.medicalCard.show');
-        Route::get('/appointments/{appointment}/medicalRecord', [App\Http\Controllers\Doctor\Appointment\MedicalCard::class, 'create'])->name('doctor.medicalCard.create');
-        Route::post('/appointments/medicalRecord', [App\Http\Controllers\Doctor\Appointment\MedicalCard::class, 'store'])->name('doctor.medicalCard.store');
+        Route::get('/medicalRecords/{medicalRecord}', [App\Http\Controllers\Doctor\Appointment\MedicalCard::class, 'index'])->name('doctor.appointment.make_med_record.index');
+        Route::get('/currentMedicalRecords/{currentMedicalRecord}', [App\Http\Controllers\Doctor\Appointment\MedicalCard::class, 'show'])->name('doctor.appointment.make_med_record.show');
+        Route::get('/appointments/{appointment}/makemedicalrecord', [App\Http\Controllers\Doctor\Appointment\MedicalCard::class, 'create'])->name('doctor.appointment.make_med_record.create');
+        Route::post('/appointments/makemedicalrecord', [App\Http\Controllers\Doctor\Appointment\MedicalCard::class, 'store'])->name('doctor.appointment.make_med_record.store');
+
+
     });
+
+
 });

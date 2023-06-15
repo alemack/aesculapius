@@ -8,24 +8,31 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1>Создание записи в медкарту</h1>
-            <form method="POST" action="{{ route('doctor.medicalCard.store') }}">
-                @csrf
-                <input type="hidden" name="patient_id" value="{{ $appointment->patient_id }}">
-                <input type="hidden" name="doctor_id" value="{{ $appointment->schedule->doctor->id }}">
-                <input type="hidden" name="appointment_date" value="{{ $appointment->schedule->date }}">
-                <div class="mb-3">
-                    <label for="diagnosis" class="form-label">Диагноз</label>
-                    <input type="text" class="form-control" id="diagnosis" name="diagnosis" required>
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="mb-0">Создание записи в медицинскую карту</h1>
                 </div>
-                <div class="mb-3">
-                    <label for="treatment" class="form-label">Лечение</label>
-                    <textarea class="form-control" id="treatment" name="treatment" rows="3" required></textarea>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('doctor.appointment.make_med_record.store') }}">
+                        @csrf
+                        <input type="hidden" name="patient_id" value="{{ $medicalRecord->patient_id }}">
+                        <input type="hidden" name="doctor_id" value="{{ $user->doctor->id }}">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="diagnosis" class="form-label">Диагноз</label>
+                                <input type="text" class="form-control" id="diagnosis" name="diagnosis" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="treatment" class="form-label">Лечение</label>
+                                <textarea class="form-control" id="treatment" name="treatment" rows="3" required></textarea>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ route('doctor.appointment.index') }}" class="btn btn-primary">Назад</a>
+                            <button type="submit" class="btn btn-primary">Записать</button>
+                        </div>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-primary">Записать</button>
-            </form>
-            <div class="mt-3">
-                <button type="button" class="btn btn-light"><a href="{{ route('doctor.appointment.index') }}">Вернуться к списку записей</a></button>
             </div>
         </div>
     </div>
