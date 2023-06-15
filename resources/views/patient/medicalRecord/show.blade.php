@@ -8,7 +8,7 @@
         <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <h1 class="card-title">Детали записи на прием</h1>
+                        <h1 class="card-title">Детали приема</h1>
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <h4>Данные врача:</h4>
@@ -16,20 +16,12 @@
                                     <tbody>
                                         <tr>
                                             <td>Врач:</td>
-                                            <td>{{ $appointment->schedule->doctor->user->name }}</td>
+                                            <td>{{ $medicalRecord->doctor->user->name }}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Статус:</td>
-                                            <td>{{$appointment->status}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Начало приема:</td>
-                                            <td>{{ $appointment->schedule->start_time }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Конец приема:</td>
-                                            <td>{{ $appointment->schedule->end_time }}</td>
-                                        </tr>
+                                        {{-- <tr>
+                                            <td>Специализация:</td>
+                                            <td>{{ $medicalRecord->doctor->user->name }}</td>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -49,34 +41,30 @@
                             <tbody>
                                 <tr>
                                     <td>Дата:</td>
-                                    <td>{{$appointment->schedule->date}}</td>
+                                    <td>{{$medicalRecord->appointment_date}}</td>
                                 </tr>
                                 <tr>
                                     <td>День недели:</td>
                                     <td>
                                         @php
-                                            $dayOfWeek = \Carbon\Carbon::parse($appointment->schedule->date)->locale('ru')->isoFormat('dddd');
+                                            $dayOfWeek = \Carbon\Carbon::parse($medicalRecord->appoinment_date)->locale('ru')->isoFormat('dddd');
                                             $capitalizedDayOfWeek = mb_strtoupper(mb_substr($dayOfWeek, 0, 1)) . mb_substr($dayOfWeek, 1);
                                         @endphp
                                         {{ $capitalizedDayOfWeek }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>Диагноз:</td>
+                                    <td>{{$medicalRecord->diagnosis}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Назначенное лечение:</td>
+                                    <td>{{$medicalRecord->treatment}}</td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="mt-3 d-flex justify-content-between">
-                            <a href="{{ route('patient.appointment.index') }}" class="btn btn-primary text-white">Назад</a>
-
-                            <form method="POST" action="{{route('patient.appointment.delete', $appointment->id)}}">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" type="submit">Удалить</button>
-                            </form>
-
-                            {{-- <a href="{{route('patient.appointment.delete', $appointment->id)}}" class="btn btn-danger"style="background-color: red;">Отменить</a> --}}
-                            {{-- <button class="btn btn-danger" type="submit" style="background-color: red;">Отменить</button> --}}
-                            {{-- <input type="hidden" name="patient_id" value="{{$user->patient->id}}">
-                            <input type="hidden" name="schedule_id" value="{{$schedule->id}}">
-                            <input type="hidden" name="status" value="ожидание подтверждение"> --}}
+                            <a href="{{ route('patient.medical_records.index') }}" class="btn btn-primary text-white">Назад</a>
                         </div>
                     </div>
                 </div>

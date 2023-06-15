@@ -91,7 +91,15 @@ Route::group(['prefix'=>'patient', 'namespace'=>'Patient', 'middleware'=> 'patie
         Route::delete('appointments/{appointment}', [App\Http\Controllers\Patient\Appointment\DestroyController::class, '__invoke'])->name('patient.appointment.delete');
         // Route::get('/appointments/{appointment}/cancelappointment', [App\Http\Controllers\Patient\Appointment\CancelAppointmentController::class, 'cancel'])->name('patient.appointment.cancel_appointment.cancel');
     });
+
+    Route::group(['prefix'=>'medicalRecords', 'namespace' => 'MedicalRecord'], function () {
+        Route::get('/medicalRecords', [App\Http\Controllers\Patient\MedicalRecord\IndexController::class, '__invoke'])->name('patient.medical_records.index');
+        Route::get('/medicalRecords/{medicalRecord}', [App\Http\Controllers\Patient\MedicalRecord\ShowController::class, '__invoke'])->name('patient.medical_records.show');
+        // Route::get('/appointments/{appointment}/cancelappointment', [App\Http\Controllers\Patient\Appointment\CancelAppointmentController::class, 'cancel'])->name('patient.appointment.cancel_appointment.cancel');
+    });
 });
+
+
 Route::group(['prefix'=>'doctor', 'namespace'=>'Doctor'], function() {
     Route::group(['prefix'=>'schedule', 'namespace' => 'Schedule'], function () {
         Route::get('/schedules', [App\Http\Controllers\Doctor\Schedule\IndexController::class, '__invoke'])->name('doctor.schedule.index');

@@ -7,8 +7,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <h1>Мои записи на прием</h1>
-            @if ($appointments->isEmpty())
+            <h1>История записей</h1>
+            @if ($medical_records->isEmpty())
                 <div class="alert alert-info text-center" role="alert">
                     Нет доступных записей на прием.
                 </div>
@@ -22,32 +22,34 @@
                             <th>День недели</th>
                             <th>Начало</th>
                             <th>Конец</th>
-                            <th>Статус</th>
+                            {{-- <th>Диагноз</th> --}}
+                            {{-- <th>Лечение</th> --}}
                             {{-- <th>Действия</th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($appointments as $appointment)
+                        @foreach ($medical_records as $medical_record)
                             <tr>
                                 {{-- <td>{{ $appointment->id }}</td> --}}
-                                <td>{{ $appointment->schedule->doctor->user->name }}</td>
-                                <td>{{ $appointment->schedule->date }}</td>
+                                <td>{{ $medical_record->doctor->user->name }}</td>
+                                <td>{{ $medical_record->appointment_date }}</td>
                                 <td>
                                     @php
-                                        $dayOfWeek = \Carbon\Carbon::parse($appointment->schedule->date)->locale('ru')->isoFormat('dddd');
+                                        $dayOfWeek = \Carbon\Carbon::parse($medical_record->appoinment_date)->locale('ru')->isoFormat('dddd');
                                         $capitalizedDayOfWeek = mb_strtoupper(mb_substr($dayOfWeek, 0, 1)) . mb_substr($dayOfWeek, 1);
                                     @endphp
                                     {{ $capitalizedDayOfWeek }}
                                 </td>
-                                <td>{{ $appointment->schedule->start_time }}</td>
-                                <td>{{ $appointment->schedule->end_time }}</td>
-                                <td>{{ $appointment->status }}</td>
+                                <td>{{ $medical_record->doctor->schedules->first()->start_time }}</td>
+                                <td>{{ $medical_record->doctor->schedules->first()->end_time }}</td>
+                                {{-- <td>{{ $medical_record->diagnosis }}</td> --}}
+                                {{-- <td>{{ $medical_record->treatment }}</td> --}}
                                 <td>
                                     {{-- <div>
                                         <a href="{{ route('patient.schedule.show', $appointment->schedule->id) }}" class="btn btn-primary btn-sm">Просмотр</a>
                                     </div> --}}
                                     <div>
-                                        <a href="{{ route('patient.appointment.show', $appointment->id) }}" class="btn btn-primary btn-sm">Просмотр</a>
+                                        <a href="{{ route('patient.medical_records.show', $medical_record->id) }}" class="btn btn-primary btn-sm">Просмотр</a>
                                     </div>
                                 </td>
                             </tr>
@@ -56,7 +58,7 @@
                 </table>
             @endif
             <div class="text-center">
-                <a href="{{ route('patient.schedule.index') }}" class="btn btn-primary text-white">Назад</a>
+                <a href="{{ route('home') }}" class="btn btn-primary text-white">Назад</a>
             </div>
         </div>
     </div>
