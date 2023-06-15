@@ -8,7 +8,10 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        $appointments = Appointment::paginate(10);
+        // $appointments = Appointment::paginate(10);
+        $user = Auth()->user();
+        $patientId = $user->patient->id;
+        $appointments = Appointment::where('patient_id', $patientId)->paginate(10);
         return view('patient.appointment.index', compact('appointments'));
     }
 }
