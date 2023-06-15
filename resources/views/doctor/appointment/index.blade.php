@@ -7,46 +7,55 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h1>Мои записи на прием</h1>
+        <div class="col-md-10">
+            <h1>Записи на прием</h1>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>№</th>
-                        <th>Врач</th>
+                        <th>Пациент</th>
                         <th>Дата</th>
+                        <th>День недели:</th>
                         <th>Начало</th>
                         <th>Конец</th>
                         <th>Статус</th>
-                        <th>Действия</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($appointments as $appointment)
                         <tr>
-                            <td>{{ $appointment->id }}</td>
-                            <td>{{ $appointment->schedule->doctor->user->name }}</td>
+                            <td>{{ $appointment->patient->user->name }}</td>
                             <td>{{ $appointment->schedule->date }}</td>
+                            <td>
+                                @php
+                                    $dayOfWeek = \Carbon\Carbon::parse($appointment->schedule->date)->locale('ru')->isoFormat('dddd');
+                                    $capitalizedDayOfWeek = mb_strtoupper(mb_substr($dayOfWeek, 0, 1)) . mb_substr($dayOfWeek, 1);
+                                @endphp
+                                {{ $capitalizedDayOfWeek }}
+                            </td>
                             <td>{{ $appointment->schedule->start_time }}</td>
                             <td>{{ $appointment->schedule->end_time }}</td>
                             <td>{{ $appointment->status }}</td>
                             <td>
                                 <div>
-                                    <button type="button" class="btn btn-light"><a href="{{route('doctor.appointment.show', $appointment->id)}}">Посмотреть</a></button>
+                                    <a href="{{ route('doctor.appointment.show', $appointment->id) }}" class="btn btn-primary btn-sm">Просмотр</a>
                                 </div>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            <div class="text-center">
+                <a href="{{ route('home') }}" class="btn btn-primary text-white">Назад</a>
+            </div>
         </div>
     </div>
 
+
 {{-- <div> --}}
-    <hr>
-    <button type="button" class="btn btn-light"><a href="{{ route('home') }}">Вернуться в кабинет</a></button>
+    {{-- <hr>
+    <button type="button" class="btn btn-light"><a href="{{ route('home') }}">Вернуться в кабинет</a></button> --}}
 {{-- </div> --}}
-<div class="mt-3">
+{{-- <div class="mt-3">
     {{$appointments->links()}}
-</div>
+</div> --}}
 @endsection
