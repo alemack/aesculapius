@@ -14,28 +14,36 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>№</th>
-                        <th>Врач</th>
+                        {{-- <th>№</th> --}}
+                        {{-- <th>Врач</th> --}}
                         <th>Дата</th>
+                        <th>День недели</th>
                         <th>Начало</th>
                         <th>Конец</th>
-                        <th>Доступ</th>
-                        <th>Действия</th>
+                        <th>Статус</th>
+                        {{-- <th>Действия</th> --}}
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($schedules as $schedule)
                         <tr>
-                            <td>{{ $schedule->id }}</td>
-                            <td>{{ $schedule->doctor->user->name }}</td>
+                            {{-- <td>{{ $schedule->id }}</td> --}}
+                            {{-- <td>{{ $schedule->doctor->user->name }}</td> --}}
                             <td>{{ $schedule->date }}</td>
+                            <td>
+                                @php
+                                    $dayOfWeek = \Carbon\Carbon::parse($schedule->date)->locale('ru')->isoFormat('dddd');
+                                    $capitalizedDayOfWeek = mb_strtoupper(mb_substr($dayOfWeek, 0, 1)) . mb_substr($dayOfWeek, 1);
+                                @endphp
+                                {{ $capitalizedDayOfWeek }}
+                            </td>
                             <td>{{ $schedule->start_time }}</td>
                             <td>{{ $schedule->end_time }}</td>
                             <td>{{ $schedule->is_available ? "Принимает" : "Не принимает" }}</td>
                             <td>
-                                <div>
+                                {{-- <div>
                                     <button type="button" class="btn btn-outline-primary"><a href="{{ route('patient.schedule.show', $schedule->id) }}">Просмотр</a></button>
-                                </div>
+                                </div> --}}
                                 {{-- <div>
                                     <form method="POST" action="{{ route('admin.schedule.delete', $schedule->id) }}">
                                         @csrf
@@ -44,16 +52,24 @@
                                     </form>
                                 </div> --}}
                             </td>
+                            <td>
+                                <div>
+                                    <a href="{{ route('doctor.schedule.show', $schedule->id) }}" class="btn btn-primary btn-sm">Просмотр</a>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            <div class="text-center">
+                <a href="{{ route('home') }}" class="btn btn-primary text-white">Назад</a>
+            </div>
         </div>
     </div>
 </div>
-<hr>
-<button type="button" class="btn btn-light"><a href="{{ route('home') }}">Вернуться в кабинет</a></button>
+{{-- <hr> --}}
+{{-- <button type="button" class="btn btn-light"><a href="{{ route('home') }}">Вернуться в кабинет</a></button>
 <div class="mt-3">
     {{ $schedules->links() }}
-</div>
+</div> --}}
 @endsection

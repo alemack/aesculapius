@@ -10,6 +10,6 @@ class ShowController extends Controller
     public function __invoke(Appointment $appointment)
     {
         // dd('show');
-        return view('doctor.appointment.show', compact('appointment'));
+        return view('doctor.schedule.show', compact('appointment'));
     }
 }

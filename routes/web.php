@@ -103,6 +103,9 @@ Route::group(['prefix'=>'patient', 'namespace'=>'Patient', 'middleware'=> 'patie
 Route::group(['prefix'=>'doctor', 'namespace'=>'Doctor'], function() {
     Route::group(['prefix'=>'schedule', 'namespace' => 'Schedule'], function () {
         Route::get('/schedules', [App\Http\Controllers\Doctor\Schedule\IndexController::class, '__invoke'])->name('doctor.schedule.index');
+        Route::get('/schedules/{schedule}', [App\Http\Controllers\Doctor\Schedule\ShowController::class, '__invoke'])->name('doctor.schedule.show');
+        Route::get('schedules/{schedule}/edit', [App\Http\Controllers\Doctor\Schedule\EditController::class, '__invoke'])->name('doctor.schedule.edit');
+        Route::patch('schedules/{schedule}', [App\Http\Controllers\Doctor\Schedule\UpdateController::class, '__invoke'])->name('doctor.schedule.update');
     });
 
     Route::group(['prefix'=>'appointment', 'namespace' => 'Appointment'], function () {
