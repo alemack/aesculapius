@@ -8,6 +8,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <h1>Управление врачами</h1>
+            <div>
+                <a href="{{route('admin.doctor.create')}}" class="btn btn-success mb-sm">Создать</a>
+            </div>
             <table class="table">
                 <thead>
                     <tr>
