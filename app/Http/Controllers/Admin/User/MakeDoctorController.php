@@ -24,6 +24,13 @@ class MakeDoctorController extends Controller
                 'specializations'=>'',
             ]
         );
+
+        $user = User::findOrFail($data['user_id']);
+
+        // Update user role to 'doctor'
+        $user->role = 'doctor';
+        $user->save();
+
         // dd($data);
         $specializations = $data['specializations'];
         unset($data['specializations']);
@@ -31,8 +38,36 @@ class MakeDoctorController extends Controller
         $doctor = Doctor::create($data);
         // dd($doctor);
         $doctor->specializations()->attach($specializations);
-        dd('wddw');
+        // dd('wddw');
 
-        return redirect()->route('admin.user.index');
+        return redirect()->route('admin.doctor.index');
     }
+
+
+    // public function store(Request $request)
+    // {
+    //     $data = request()->validate([
+    //         'user_id' => '',
+    //         'specializations' => 'required|array',
+    //     ]);
+
+    //     $user = User::findOrFail($data['user_id']);
+
+    //     // Update user role to 'doctor'
+    //     $user->role = 'doctor';
+    //     $user->save();
+
+    //     $specializations = $data['specializations'];
+
+    //     unset($data['user_id']);
+    //     unset($data['specializations']);
+
+    //     $doctor = Doctor::create($data);
+
+    //     // Attach specializations to the doctor
+    //     $doctor->specializations()->attach($specializations);
+
+    //     return redirect()->route('admin.user.index');
+    // }
+
 }
