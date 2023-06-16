@@ -23,6 +23,12 @@ class MakePatientController extends Controller
             ]
         );
 
+        $user = User::findOrFail($data['user_id']);
+
+        // Update user role to 'doctor'
+        $user->role = 'patient';
+        $user->save();
+
         $patient = Patient::create($data);
 
         return redirect()->route('admin.user.index');
