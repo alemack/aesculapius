@@ -116,9 +116,5 @@ Route::group(['prefix'=>'doctor', 'namespace'=>'Doctor'], function() {
         Route::get('/currentMedicalRecords/{currentMedicalRecord}', [App\Http\Controllers\Doctor\Appointment\MedicalCard::class, 'show'])->name('doctor.appointment.make_med_record.show');
         Route::get('/appointments/{appointment}/makemedicalrecord', [App\Http\Controllers\Doctor\Appointment\MedicalCard::class, 'create'])->name('doctor.appointment.make_med_record.create');
         Route::post('/appointments/makemedicalrecord', [App\Http\Controllers\Doctor\Appointment\MedicalCard::class, 'store'])->name('doctor.appointment.make_med_record.store');
-
-
     });
-
-
 });
