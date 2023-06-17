@@ -8,6 +8,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <h1>Управление пользователями</h1>
+            <div>
+                <a href="{{route('admin.user.create')}}" class="btn btn-success mb-sm">Создать</a>
+            </div>
             <table class="table">
                 <thead>
                     <tr>
