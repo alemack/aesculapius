@@ -69,7 +69,7 @@
                             <form method="POST" action="{{route('patient.appointment.delete', $appointment->id)}}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit">Удалить</button>
+                                <button class="btn btn-danger" type="submit">Отменить</button>
                             </form>
 
                             {{-- <a href="{{route('patient.appointment.delete', $appointment->id)}}" class="btn btn-danger"style="background-color: red;">Отменить</a> --}}

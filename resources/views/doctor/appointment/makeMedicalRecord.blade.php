@@ -10,7 +10,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="mb-0">Создание записи в медицинскую карту</h1>
+                    <h1 class="mb-0">Добавление записи в медицинскую карту</h1>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('doctor.appointment.make_med_record.store') }}">
