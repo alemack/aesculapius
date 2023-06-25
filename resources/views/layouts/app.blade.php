@@ -17,6 +17,7 @@
     <title>{{ config('app.patientSchedules', 'Расписание') }}</title>
     <title>{{ config('app.patientAppointment', 'Мои записи') }}</title>
     <title>{{ config('app.patientMedicalRecords', 'Мед карта') }}</title>
+    <title>{{ config('app.news', 'Новости') }}</title>
     <title>{{ config('app.doctorSchedules', 'Расписание') }}</title>
     <title>{{ config('app.doctorAppointment', 'Прием') }}</title>
 
@@ -92,6 +93,9 @@
                         <a class="navbar-brand" href="{{route('patient.medical_records.index')}}">
                             {{ config('app.patientMedicalRecords', 'Мед карта') }}
                         </a>
+                        {{-- <a class="navbar-brand" href="{{route('patient.news.index')}}">
+                            {{ config('app.news', 'Новости') }}
+                        </a> --}}
                     @elseif(auth()->user()->role==='doctor')
                         <a class="navbar-brand" href="{{route('doctor.schedule.index')}}">
                             {{ config('app.doctorSchedules', 'Расписание') }}

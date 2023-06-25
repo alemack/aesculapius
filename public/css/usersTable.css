@@ -17,3 +17,12 @@ table {
   div {
     display: inline-block;
   }
+
+  /* body {
+    background: linear-gradient(rgb(33, 37, 41), rgba(255, 255, 255));
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-attachment: scroll;
+    font-family: sans-serif;
+    color: #000;
+    } */

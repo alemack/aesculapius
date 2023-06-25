@@ -60,6 +60,17 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end"></label>
+
+                            <div class="col-md-6">
+                                Нажимая “Продолжить”, вы соглашаетесь с
+                                <a href="{{ url('/terms') }}">Условиями использования</a>
+                                и
+                                <a href="{{ url('/privacy-policy') }}">Политикой конфиденциальности</a>
+                            </div>
+                        </div>
+
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">

@@ -27,6 +27,8 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/terms', [App\Http\Controllers\TermsController::class, '__invoke'])->name('terms');
+Route::get('/privacy-policy', [App\Http\Controllers\PrivacyPolicyController::class, '__invoke'])->name('privacy.policy');
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -95,6 +97,13 @@ Route::group(['prefix'=>'patient', 'namespace'=>'Patient', 'middleware'=> 'patie
     Route::group(['prefix'=>'medicalRecords', 'namespace' => 'MedicalRecord'], function () {
         Route::get('/medicalRecords', [App\Http\Controllers\Patient\MedicalRecord\IndexController::class, '__invoke'])->name('patient.medical_records.index');
         Route::get('/medicalRecords/{medicalRecord}', [App\Http\Controllers\Patient\MedicalRecord\ShowController::class, '__invoke'])->name('patient.medical_records.show');
+        // Route::get('/appointments/{appointment}/cancelappointment', [App\Http\Controllers\Patient\Appointment\CancelAppointmentController::class, 'cancel'])->name('patient.appointment.cancel_appointment.cancel');
+    });
+
+    Route::group(['prefix'=>'news', 'namespace' => 'News'], function () {
+        Route::get('/news', [App\Http\Controllers\Patient\News\IndexController::class, '__invoke'])->name('patient.news.index');
+        // Route::get('/appointments/{appointment}', [App\Http\Controllers\Patient\Appointment\ShowController::class, '__invoke'])->name('patient.appointment.show');
+        // Route::delete('appointments/{appointment}', [App\Http\Controllers\Patient\Appointment\DestroyController::class, '__invoke'])->name('patient.appointment.delete');
         // Route::get('/appointments/{appointment}/cancelappointment', [App\Http\Controllers\Patient\Appointment\CancelAppointmentController::class, 'cancel'])->name('patient.appointment.cancel_appointment.cancel');
     });
 });
