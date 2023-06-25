@@ -9,7 +9,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.main', 'Главная') }}</title>
+    {{-- <title>{{ config('app.main', 'Главная') }}</title> --}}
+    <title>{{ config('app.home', 'Главная') }}</title>
     <title>{{ config('app.users', 'Пользователи') }}</title>
     <title>{{ config('app.doctors', 'Врачи') }}</title>
     <title>{{ config('app.specializations', 'Специализации') }}</title>
@@ -61,8 +62,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.main', 'Главная') }}
+                <a class="navbar-brand" href="{{ url('/home') }}">
+                    {{ config('app.home', 'Главная') }}
                 </a>
                 {{-- @can('view', auth()->user())
                 <a class="navbar-brand" href="{{ route('patient.schedule.index') }}">
@@ -154,14 +155,18 @@
                                     {{Auth::user()->role}} {{ Auth::user()->name }}
                                 </a>
 
+
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url('/cabinet') }}">Кабинет</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
 
-                                        {{-- <br> --}}
+                                        {{-- <a href="{{ url('/terms') }}">Кабинет</a>
+                                        <br> --}}
                                         {{ __('Logout') }}
                                     </a>
+
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         class="d-none">
