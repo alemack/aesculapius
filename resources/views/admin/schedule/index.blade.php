@@ -11,6 +11,13 @@
             <div>
                 <a href="{{route('admin.schedule.create')}}" class="btn btn-success mb-sm">Создать</a>
             </div>
+            <div>
+                <form method="POST" action="{{route('admin.schedule.alldelete')}}">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger" type="submit">Очистить</button>
+                </form>
+            </div>
             <table class="table">
                 <thead>
                     <tr>

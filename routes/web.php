@@ -58,6 +58,7 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin', 'middleware'=> 'admin']
         Route::get('schedules/{schedule}/edit', [App\Http\Controllers\Admin\Schedule\EditController::class, '__invoke'])->name('admin.schedule.edit');
         Route::patch('schedules/{schedule}', [App\Http\Controllers\Admin\Schedule\UpdateController::class, '__invoke'])->name('admin.schedule.update');
         Route::delete('schedules/{schedule}', [App\Http\Controllers\Admin\Schedule\DestroyController::class, '__invoke'])->name('admin.schedule.delete');
+        Route::delete('allschedules', [App\Http\Controllers\Admin\Schedule\AllDestroyController::class, '__invoke'])->name('admin.schedule.alldelete');
     });
     Route::group(['prefix'=>'doctor', 'namespace' => 'Doctor'], function () {
         Route::get('/doctors', [App\Http\Controllers\Admin\Doctor\IndexController::class, '__invoke'])->name('admin.doctor.index');
