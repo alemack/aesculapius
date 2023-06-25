@@ -69,6 +69,15 @@ Route::group(['prefix'=>'admin', 'namespace' => 'Admin', 'middleware'=> 'admin']
         Route::patch('doctors/{doctor}', [App\Http\Controllers\Admin\Doctor\UpdateController::class, '__invoke'])->name('admin.doctor.update');
         Route::delete('doctors/{doctor}', [App\Http\Controllers\Admin\Doctor\DestroyController::class, '__invoke'])->name('admin.doctor.delete');
     });
+    Route::group(['prefix'=>'patient', 'namespace' => 'Patient'], function () {
+        Route::get('/patients', [App\Http\Controllers\Admin\Patient\IndexController::class, '__invoke'])->name('admin.patient.index');
+        Route::get('/patients/create', [App\Http\Controllers\Admin\Patient\CreateController::class, '__invoke'])->name('admin.patient.create');
+        Route::post('patients', [App\Http\Controllers\Admin\Patient\StoreController::class, '__invoke'])->name('admin.patient.store');
+        Route::get('/patients/{patient}', [App\Http\Controllers\Admin\Patient\ShowController::class, '__invoke'])->name('admin.patient.show');
+        Route::get('patients/{patient}/edit', [App\Http\Controllers\Admin\Patient\EditController::class, '__invoke'])->name('admin.patient.edit');
+        Route::patch('patients/{patient}', [App\Http\Controllers\Admin\Patient\UpdateController::class, '__invoke'])->name('admin.patient.update');
+        Route::delete('patients/{patient}', [App\Http\Controllers\Admin\Patient\DestroyController::class, '__invoke'])->name('admin.patient.delete');
+    });
     Route::group(['prefix'=>'specialization', 'namespace' => 'Specialization'], function () {
         Route::get('/specializations', [App\Http\Controllers\Admin\Specialization\IndexController::class, '__invoke'])->name('admin.specialization.index');
         Route::get('/specializations/create', [App\Http\Controllers\Admin\Specialization\CreateController::class, '__invoke'])->name('admin.specialization.create');

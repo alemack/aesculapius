@@ -13,6 +13,7 @@
     <title>{{ config('app.home', 'Главная') }}</title>
     <title>{{ config('app.users', 'Пользователи') }}</title>
     <title>{{ config('app.doctors', 'Врачи') }}</title>
+    <title>{{ config('app.patients', 'Пациенты') }}</title>
     <title>{{ config('app.specializations', 'Специализации') }}</title>
     <title>{{ config('app.schedules', 'Расписание') }}</title>
     <title>{{ config('app.patientSchedules', 'Расписание') }}</title>
@@ -110,6 +111,9 @@
                         </a>
                         <a class="navbar-brand" href="{{route('admin.doctor.index')}}">
                             {{ config('app.doctors', 'Врачи') }}
+                        </a>
+                        <a class="navbar-brand" href="{{route('admin.patient.index')}}">
+                            {{ config('app.patients', 'Пациенты') }}
                         </a>
                         <a class="navbar-brand" href="{{route('admin.specialization.index')}}">
                             {{ config('app.specializations', 'Специализации') }}
