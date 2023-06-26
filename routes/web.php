@@ -24,9 +24,15 @@ use App\Http\Controllers\Admin\User\MakePatientController;
 |
 */
 Auth::routes();
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
 Route::get('/terms', [App\Http\Controllers\TermsController::class, '__invoke'])->name('terms');
 Route::get('/privacy-policy', [App\Http\Controllers\PrivacyPolicyController::class, '__invoke'])->name('privacy.policy');
 Route::get('/cabinet', [App\Http\Controllers\CabinetController::class, '__invoke'])->name('privacy.policy');
