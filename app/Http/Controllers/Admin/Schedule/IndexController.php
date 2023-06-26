@@ -8,7 +8,7 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        $schedules = Schedule::paginate(30);
+        $schedules = Schedule::paginate(7);
         return view('admin.schedule.index', compact('schedules'));
     }
 }

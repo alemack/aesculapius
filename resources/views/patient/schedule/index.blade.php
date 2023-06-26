@@ -23,52 +23,68 @@
             </div>
             {{-- <h1>Расписание работы врачей</h1> --}}
             @foreach ($specializations as $specialization)
-                <h2>{{ $specialization->name }}</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            {{-- <th>№</th> --}}
-                            {{-- <th>Врач</th> --}}
-                            <th>День недели</th>
-                            <th>Начало приема</th>
-                            <th>Конец приема</th>
-                            <th>Статус</th>
-                            {{-- <th>Действия</th> --}}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($specialization->doctors as $doctor)
-                            <h5>{{ $doctor->user->name }}</h5>
-                            @foreach ($doctor->schedules as $schedule)
-                                <tr>
-                                    {{-- <td>{{ $schedule->id }}</td> --}}
-                                    {{-- <td>{{ $doctor->user->name }}</td> --}}
-                                    <td>
-                                        @php
-                                            $dayOfWeek = \Carbon\Carbon::parse($schedule->date)->locale('ru')->isoFormat('dddd');
-                                            $capitalizedDayOfWeek = mb_strtoupper(mb_substr($dayOfWeek, 0, 1)) . mb_substr($dayOfWeek, 1);
-                                        @endphp
-                                        {{ $capitalizedDayOfWeek }}
-                                    </td>
-                                    <td>{{ $schedule->start_time }}</td>
-                                    <td>{{ $schedule->end_time }}</td>
-                                    <td>{{ $schedule->is_available ? "Принимает" : "Не принимает" }}</td>
-                                    {{-- <td>
-                                        <div>
-                                            <button type="button" class="btn btn-outline-primary"><a href="{{ route('patient.schedule.show', $schedule->id) }}">Просмотр</a></button>
-                                        </div>
-                                    </td> --}}
-                                    <td>
-                                        <div>
-                                            <a href="{{ route('patient.schedule.show', $schedule->id) }}" class="btn btn-primary btn-sm">Просмотр</a>
-                                        </div>
-                                    </td>
+                @php
+                    $hasSchedule = false;
+                @endphp
 
-                                </tr>
+                @foreach ($specialization->doctors as $doctor)
+                    @if ($doctor->schedules->count() > 0)
+                        @php
+                            $hasSchedule = true;
+                            break;
+                        @endphp
+                    @endif
+                @endforeach
+
+                @if ($hasSchedule)
+                    <h2>{{ $specialization->name }}</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                {{-- <th>№</th> --}}
+                                {{-- <th>Врач</th> --}}
+                                <th>День недели</th>
+                                <th>Начало приема</th>
+                                <th>Конец приема</th>
+                                <th>Статус</th>
+                                {{-- <th>Действия</th> --}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($specialization->doctors as $doctor)
+                                @if ($doctor->schedules->count() > 0)
+                                    <h5>{{ $doctor->user->name }}</h5>
+                                    @foreach ($doctor->schedules as $schedule)
+                                        <tr>
+                                            {{-- <td>{{ $schedule->id }}</td> --}}
+                                            {{-- <td>{{ $doctor->user->name }}</td> --}}
+                                            <td>
+                                                @php
+                                                    $dayOfWeek = \Carbon\Carbon::parse($schedule->date)->locale('ru')->isoFormat('dddd');
+                                                    $capitalizedDayOfWeek = mb_strtoupper(mb_substr($dayOfWeek, 0, 1)) . mb_substr($dayOfWeek, 1);
+                                                @endphp
+                                                {{ $capitalizedDayOfWeek }}
+                                            </td>
+                                            <td>{{ $schedule->start_time }}</td>
+                                            <td>{{ $schedule->end_time }}</td>
+                                            <td>{{ $schedule->is_available ? "Принимает" : "Не принимает" }}</td>
+                                            {{-- <td>
+                                                <div>
+                                                    <button type="button" class="btn btn-outline-primary"><a href="{{ route('patient.schedule.show', $schedule->id) }}">Просмотр</a></button>
+                                                </div>
+                                            </td> --}}
+                                            <td>
+                                                <div>
+                                                    <a href="{{ route('patient.schedule.show', $schedule->id) }}" class="btn btn-primary btn-sm">Просмотр</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             @endforeach
-                        @endforeach
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                @endif
             @endforeach
             <div class="text-center">
                 <a href="{{ route('home') }}" class="btn btn-primary text-white">Назад</a>

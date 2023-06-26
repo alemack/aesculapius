@@ -9,17 +9,46 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MedicalRecord;
 use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class MedicalCard extends Controller
 {
+    // public function index(int $patientId)
+    // {
+    //     // dd($appointment);
+    //     // // dump($appointment->id);
+    //     // dd($appointment->patient_id);
+    //     $medical_records = MedicalRecord::where('patient_id', $patientId)->paginate(10);
+    //     return view('doctor.appointment.medicalRecordsIndex', compact('medical_records'));
+    // }
+
     public function index(int $patientId)
     {
-        // dd($appointment);
-        // // dump($appointment->id);
-        // dd($appointment->patient_id);
+        // $doctorId = Auth::id();
+        $user = Auth()->user();
+        $doctorId  = $user->doctor->id;
+        $currentDate = Carbon::now();
+
         $medical_records = MedicalRecord::where('patient_id', $patientId)->paginate(10);
-        return view('doctor.appointment.medicalRecordsIndex', compact('medical_records'));
+
+        if ($medical_records->isEmpty()) {
+        // Создаем новую запись с данными "открыта медицинская карта"
+        $medicalRecord = new MedicalRecord();
+        $medicalRecord->patient_id = $patientId;
+        $medicalRecord->doctor_id = $doctorId;
+        $medicalRecord->appointment_date = $currentDate;
+        $medicalRecord->diagnosis = 'Открыта медицинская карта';
+        $medicalRecord->treatment = 'Открыта медицинская карта';
+        $medicalRecord->save();
+
+        // Обновляем список записей
+        $medical_records = MedicalRecord::where('patient_id', $patientId)->paginate(10);
     }
+
+    return view('doctor.appointment.medicalRecordsIndex', compact('medical_records'));
+    }
+
 
     public function show(int $medicalRecord)
     {
@@ -62,6 +91,7 @@ class MedicalCard extends Controller
     //     MedicalRecord::create($data);
     //     return redirect()->route('doctor.appointment.index');
     // }
+
     public function store(Request $request)
     {
         $data = request()->validate([
