@@ -25,7 +25,14 @@ class MakeAppointmentController extends Controller
             'patient_id' => 'required',
             'schedule_id' => 'required',
             'status' => 'required',
+            'is_available'=>'',
         ]);
+        // dd($data['is_available']);
+
+        if($data['is_available']=='0') {
+            return redirect()->route('patient.schedule.index')->withErrors(['message' => 'Врач не приниммает в этот час на данный момент']);
+        }
+        // dd('dwdw');
 
         $existingAppointment = Appointment::where('schedule_id', $data['schedule_id'])
             ->where('patient_id', $data['patient_id'])

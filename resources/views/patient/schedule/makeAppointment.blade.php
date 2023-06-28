@@ -70,6 +70,7 @@
                             <button class="btn btn-primary" type="submit">Подтвердить</button>
                             <input type="hidden" name="patient_id" value="{{$user->patient->id}}">
                             <input type="hidden" name="schedule_id" value="{{$schedule->id}}">
+                            <input type="hidden" name="is_available" value="{{$schedule->is_available}}">
                             <input type="hidden" name="status" value="подтверждено">
                         </div>
                     </div>
